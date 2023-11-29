@@ -1,10 +1,10 @@
 let $ = document
 const imageFileInput = $.querySelector('#imageFileInput')
 
-const brightness = $.querySelector('#brightness')
-const saturation = $.querySelector('#saturation')
-const blur = $.querySelector('#blur')
-const inversion = $.querySelector('#inversion')
+const brightnessInput = $.querySelector('#brightness')
+const saturationInput = $.querySelector('#saturation')
+const blurInput = $.querySelector('#blur')
+const inversionInput = $.querySelector('#inversion')
 
 const canvas = document.querySelector('#canvas')
 let context = canvas.getContext('2d');
@@ -13,29 +13,60 @@ let context = canvas.getContext('2d');
 let setting = {}
 let image = null
 
-function resteSetting(){}
+function resteSetting() {
+    setting.brightness = "100"
+    setting.saturation = "100"
+    setting.blur = "0"
+    setting.inversion = "0"
 
-function updateSetting(key,value){}
+    brightnessInput.value = setting.brightness
+    saturationInput.value = setting.saturation
+    blurInput.value = setting.blur
+    inversionInput.value = setting.inversion
 
-function geberateFilter(){}
 
-function renderImage (){}
+}
 
-brightness.addEventListener('input',()=>{
+function updateSetting(key, value) {
+    if (image) {
+        setting[key] = value
+        console.log(key,value);
+        renderImage()
+    }
+    
+}
 
+function geberateFilter() { }
+
+function renderImage() {
+    canvas.width = image.width
+    canvas.height = image.height
+
+    context.drawImage(image, 0, 0);
+
+}
+
+brightnessInput.addEventListener('input', () => {
+    updateSetting('brightness',brightnessInput.value)
 })
-saturation.addEventListener('input',()=>{
-
+saturationInput.addEventListener('input', () => {
+    updateSetting('saturation',saturationInput.value)
 })
-blur.addEventListener('input',()=>{
-
+blurInput.addEventListener('input', () => {
+    updateSetting('blur',blurInput.value)
 })
-inversion.addEventListener('input',()=>{
-
-})
-
-imageFileInput.addEventListener('change',()=>{
-
+inversionInput.addEventListener('input', () => {
+    updateSetting('inversion',inversionInput.value)
 })
 
-window.addEventListener('load',resteSetting)
+imageFileInput.addEventListener('change', () => {
+
+    image = new Image()
+    image.addEventListener('load', () => {
+        renderImage()
+    })
+
+    image.src = URL.createObjectURL(imageFileInput.files[0])
+})
+
+window.addEventListener('load', resteSetting)
