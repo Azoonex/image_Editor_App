@@ -36,14 +36,21 @@ function updateSetting(key, value) {
     
 }
 
-function geberateFilter() { }
+function geberateFilter() {
+    const {brightness,saturation,blur,invet} = setting
+
+    return 
+    `
+    brightness(${brightness}%) saturate(${saturation}%) blur(${blur}%) invert(${invet}%)
+    `
+}
 
 function renderImage() {
     canvas.width = image.width
     canvas.height = image.height
-
+    context.filter = geberateFilter()
     context.drawImage(image, 0, 0);
-
+    console.log(geberateFilter());
 }
 
 brightnessInput.addEventListener('input', () => {
@@ -63,6 +70,7 @@ imageFileInput.addEventListener('change', () => {
 
     image = new Image()
     image.addEventListener('load', () => {
+        resteSetting()
         renderImage()
     })
 
