@@ -10,7 +10,32 @@
 
   <body>
     
-    
+   <div class="div editor">
+    <div class="toolbar">
+      <div class="toolbar-item">
+        <input type="file" id="imageFileInput">
+      </div>
+      <div class="toolbar-item">
+        <label class="tool-label" for="brightness">brightness</label>
+        <input type="range" id="brightness" min="0" max="200">
+      </div>
+      <div class="toolbar-item">
+        <label class="tool-label" for="saturation">Saturation</label>
+        <input type="range" id="brightness" min="0" max="200">
+      </div>
+      <div class="toolbar-item">
+        <label class="tool-label" for="blur">Blur</label>
+        <input type="range" id="brightness" min="0" max="25">
+      </div>
+      <div class="toolbar-item">
+        <label class="tool-label" for="inversion">Inversion</label>
+        <input type="range" id="brightness" min="0" max="100">
+      </div>
+    </div>
+    <div class="image-area">
+      <canvas width="500" height="500"></canvas>
+    </div>
+   </div> 
 
     <script src="js/app.js"></script>
   </body>
